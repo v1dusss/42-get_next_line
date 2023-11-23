@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt update && apt upgrade -y
 
-RUN ap/workspaces/codespaces/ct install curl -y
+RUN apt install curl -y
 
 RUN apt install nano -y
 
@@ -12,7 +12,7 @@ RUN apt install zsh -y
 
 RUN apt install git -y
 RUN git config --global user.name "vsivanat" && \
-    git config --global user.email "vsivanat@student.42.fr"
+	git config --global user.email "vsivanat@student.42.fr"
 
 RUN apt install build-essential -y 
 
