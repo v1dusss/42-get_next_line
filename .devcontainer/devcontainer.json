@@ -3,10 +3,6 @@
 {
 	"name": "C-Codespace",
 	"dockerFile": "./Dockerfile",
-
-	"mounts": [
-		"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
-	],
 	"customizations": {
 		"vscode": {
 			"settings": { 
