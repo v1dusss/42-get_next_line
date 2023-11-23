@@ -24,7 +24,11 @@ RUN git config --global user.name "vsivanat" && \
 
 RUN apt install build-essential -y 
 
-RUN zsh -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)" | true
+RUN apt install lsb-release -y
+
+RUN apt install sudo -y
+
+RUN bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)" | true
 
 COPY .zsh_aliase /root/.zsh_aliase
 
