@@ -28,8 +28,6 @@ RUN apt install lsb-release -y
 
 RUN apt install sudo -y
 
-RUN bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)" | true
-
 COPY .zsh_aliase /root/.zsh_aliase
 
 RUN wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh && \
@@ -40,5 +38,7 @@ RUN wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.
 RUN chsh -s zsh
 
 RUN cat ~/.zsh_aliase >> ~/.zshrc
+
+RUN bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
 
 CMD ["zsh"]
