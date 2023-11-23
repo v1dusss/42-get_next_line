@@ -39,6 +39,9 @@ RUN chsh -s zsh
 
 RUN cat ~/.zsh_aliase >> ~/.zshrc
 
+RUN python3 -m pip install --upgrade pip setuptools && \
+	python3 -m pip install norminette
+
 RUN bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
 
 CMD ["zsh"]

@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/21 18:56:16 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:11:04 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ char	*ft_trim_cache(char *cache)
 	return (result);
 }
 
-char	*ft_trim_buffer(char *temp, int i)
-{
-	if (temp[i] == '\n')
-	{
-		while (i >= 0)
-		{
-			temp++;
-			i--;
-		}
-	}
-	return(temp);
-}
+// char	*ft_trim_buffer(char *temp, int i)
+// {
+// 	if (temp[i] == '\n')
+// 	{
+// 		while (i >= 0)
+// 		{
+// 			temp++;
+// 			i--;
+// 		}
+// 	}
+// 	return(temp);
+// }
 
 char	*get_next_line(int fd)
 {
@@ -75,29 +75,29 @@ char	*get_next_line(int fd)
 	return(cache);
 }
 
-# include <unistd.h>
-# include <stdlib.h>
-#include <fcntl.h>
-int	main()
-{
-	int	fd;
+// # include <unistd.h>
+// # include <stdlib.h>
+// #include <fcntl.h>
+// int	main()
+// {
+// 	int	fd;
 
-	fd = open("hallo.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error opening file");
-		return 1;
-	}
-	// printf("%d", fd);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
-	close(fd);
-	return (0);
-}
+// 	fd = open("hallo.txt", O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		perror("Error opening file");
+// 		return 1;
+// 	}
+// 	// printf("%d", fd);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+// 	close(fd);
+// 	return (0);
+// }
