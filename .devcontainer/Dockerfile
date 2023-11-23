@@ -10,6 +10,14 @@ RUN apt install wget -y
 
 RUN apt install zsh -y
 
+RUN apt install python3 -y && \
+	apt install python3-pip -y
+
+RUN apt-get install python-dev-is-python3 -y
+
+RUN apt install python3.10-venv -y
+
+
 RUN apt install git -y
 RUN git config --global user.name "vsivanat" && \
 	git config --global user.email "vsivanat@student.42.fr"
