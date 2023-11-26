@@ -6,12 +6,10 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/23 13:11:04 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:04:26 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <stdio.h>
-#include "get_next_line.h"
 
 char	*ft_trim_cache(char *cache)
 {
@@ -19,8 +17,14 @@ char	*ft_trim_cache(char *cache)
 	int		newline;
 	int		ind;
 
-	newline = ft_strrchr_newline(cache);
+	newline = ft_strlen(cache, 1);
+	if (newline == -1)
+		newline = ft_strlen(cache, 0);
+	if (ft_strlen(cache, 0) == 0)
+		newline = -1;
 	result = malloc(sizeof(char) * (newline + 2));
+	if (!result)
+		return (NULL);
 	ind = 0;
 	while (ind < newline + 1)
 	{
@@ -32,47 +36,55 @@ char	*ft_trim_cache(char *cache)
 	return (result);
 }
 
-// char	*ft_trim_buffer(char *temp, int i)
-// {
-// 	if (temp[i] == '\n')
-// 	{
-// 		while (i >= 0)
-// 		{
-// 			temp++;
-// 			i--;
-// 		}
-// 	}
-// 	return(temp);
-// }
+char	*next(char *temp)
+{
+	int		i;
+	int		j;
+	char	*line;
+
+	i = 0;
+	while (temp[i] && temp[i] != '\n')
+		i++;
+	if (!temp[i])
+		return (NULL);
+	line = malloc((ft_strlen(temp, 0) - i + 1));
+	if (!line)
+		return (NULL);
+	i++;
+	j = 0;
+	while (temp[i])
+		line[j++] = temp[i++];
+	line[j++] = '\0';
+	return (line);
+}
 
 char	*get_next_line(int fd)
 {
 	char		*cache;
+	static int	ind = 0;
 	ssize_t		read_len;
-	ssize_t		i;
 	static char	*temp;
 	static char	buffer[BUFFER_SIZE + 1];
 
 	cache = NULL;
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1 || fd < 0)
 		return (free(cache), NULL);
 	read_len = 1;
-	i = 0;
 	while (read_len > 0)
 	{
-		i = ft_strrchr_newline(cache);
-		if (i != -1)
-			break;
-		read_len = read(fd, buffer, BUFFER_SIZE);
-		if (read_len <= 0)
-			return (NULL);
-		temp = ft_strjoin(cache, buffer);
 		cache = temp;
+		if (ft_strlen(cache, 1) != -1)
+			break ;
+		read_len = read(fd, buffer, BUFFER_SIZE);
+		if (read_len == 0 && ind++ == 0 && buffer[0] != 0)
+			break ;
+		if (read_len <= 0 || (ind > 1 && temp == NULL))
+			return (free(temp), NULL);
+		buffer[read_len] = 0;
+		temp = ft_strjoin(cache, buffer);
 	}
-	cache = ft_trim_cache(cache);
-	temp = ft_trim_buffer(temp, i);
-	// printf("\n--------------------------%s\n", temp);
-	return(cache);
+	temp = next(temp);
+	return (ft_trim_cache(cache));
 }
 
 // # include <unistd.h>

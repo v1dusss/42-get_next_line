@@ -20,9 +20,8 @@
 #  define BUFFER_SIZE 5
 # endif
 
+char	*get_next_line(int fd);
+int	ft_strlen(char *str, int nb);
+char	*ft_strjoin(char *s1, char *s2);
 
-char		*get_next_line(int fd);
-size_t	ft_strlen(char *str);
-char		*ft_strjoin(char *s1, char *s2);
-int		ft_strrchr_newline(char *s);
-# endif
+#endif
