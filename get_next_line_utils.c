@@ -6,9 +6,11 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:23:09 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/26 14:05:39 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:36:15 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 int	ft_strlen(char *str, int nb)
 {
@@ -75,5 +77,3 @@ char	*ft_strjoin(char *s1, char *s2)
 // 		return (c);
 // 	return (-1);
 // }
-
-

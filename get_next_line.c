@@ -6,10 +6,11 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/26 14:04:26 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:36:31 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
 char	*ft_trim_cache(char *cache)
 {
