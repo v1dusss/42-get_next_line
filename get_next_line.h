@@ -1,4 +1,4 @@
-   /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:42:52 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/06 12:04:10 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:46:09 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);
-int	ft_strlen(char *str, int nb);
+int		ft_strlen(char *str, int nb);
 char	*ft_strjoin(char *s1, char *s2);
 
 #endif
