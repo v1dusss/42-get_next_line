@@ -6,13 +6,13 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/27 14:55:21 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:18:29 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_trim_cache(char *cache , char *temp)
+char	*ft_trim_cache(char *cache)
 {
 	char	*result;
 	int		newline;
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 		cache = temp;
 	}
 	temp = next(temp);
-	return (ft_trim_cache(cache, temp));
+	return (ft_trim_cache(cache));
 }
 
 // # include <unistd.h>
