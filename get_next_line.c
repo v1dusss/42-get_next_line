@@ -6,13 +6,13 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/26 17:06:51 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:55:21 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_trim_cache(char *cache)
+char	*ft_trim_cache(char *cache , char *temp)
 {
 	char	*result;
 	int		newline;
@@ -64,20 +64,18 @@ char	*next(char *temp)
 char	*get_next_line(int fd)
 {
 	char		*cache;
-	static int	ind = 0;
 	ssize_t		read_len;
+	static int	ind = 0;
 	static char	*temp;
 	static char	buffer[BUFFER_SIZE + 1];
 
 	cache = NULL;
-	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1 || fd < 0)
-		return (free(cache), NULL);
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0 || fd < 0)
+		return (buffer[0] = 0, free (temp), temp = NULL, free(cache), NULL);
 	read_len = 1;
-	while (read_len > 0)
+	cache = temp;
+	while (read_len > 0 && ft_strlen(cache, 1) == -1)
 	{
-		cache = temp;
-		if (ft_strlen(cache, 1) != -1)
-			break ;
 		read_len = read(fd, buffer, BUFFER_SIZE);
 		if (read_len == 0 && ind++ == 0 && buffer[0] != 0)
 			break ;
@@ -85,9 +83,10 @@ char	*get_next_line(int fd)
 			return (NULL);
 		buffer[read_len] = 0;
 		temp = ft_strjoin(cache, buffer);
+		cache = temp;
 	}
 	temp = next(temp);
-	return (ft_trim_cache(cache));
+	return (ft_trim_cache(cache, temp));
 }
 
 // # include <unistd.h>
@@ -98,7 +97,7 @@ char	*get_next_line(int fd)
 // {
 // 	int	fd;
 
-// 	fd = open("hallo.txt", O_RDWR);
+// 	fd = open("test.txt", O_RDWR);
 // 	if (fd == -1)
 // 	{
 // 		// perror("Error opening file");
@@ -106,12 +105,12 @@ char	*get_next_line(int fd)
 // 	}
 // 	// printf("%d", fd);
 // 	printf("1%s", get_next_line(fd));
-// 	printf("2%s", get_next_line(fd));
-// 	printf("3%s", get_next_line(fd));
-// 	printf("4%s", get_next_line(fd));
-// 	printf("5%s", get_next_line(fd));
-// 	printf("6%s", get_next_line(fd));
-// 	printf("7%s", get_next_line(fd));
+// 	// printf("2%s", get_next_line(fd));
+// 	// printf("3%s", get_next_line(fd));
+// 	// printf("4%s", get_next_line(fd));
+// 	// printf("5%s", get_next_line(fd));
+// 	// printf("6%s", get_next_line(fd));
+// 	// printf("7%s", get_next_line(fd));
 // 	// printf("%s", get_next_line(fd));
 // 	// printf("%s", get_next_line(fd));
 // 	close(fd);
