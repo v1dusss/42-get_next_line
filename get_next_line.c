@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/27 15:18:29 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:08:50 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFFER_SIZE + 1];
 
 	cache = NULL;
-	if (read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0 || fd < 0)
+	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
 		return (buffer[0] = 0, free (temp), temp = NULL, free(cache), NULL);
 	read_len = 1;
 	cache = temp;
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 		if (read_len == 0 && ind++ == 0 && buffer[0] != 0)
 			break ;
 		if (read_len <= 0 || (ind > 1 && temp == NULL))
-			return (NULL);
+			return (free(temp), NULL);
 		buffer[read_len] = 0;
 		temp = ft_strjoin(cache, buffer);
 		cache = temp;
@@ -104,15 +104,15 @@ char	*get_next_line(int fd)
 // 		return 1;
 // 	}
 // 	// printf("%d", fd);
-// 	printf("1%s", get_next_line(fd));
-// 	// printf("2%s", get_next_line(fd));
-// 	// printf("3%s", get_next_line(fd));
-// 	// printf("4%s", get_next_line(fd));
-// 	// printf("5%s", get_next_line(fd));
-// 	// printf("6%s", get_next_line(fd));
-// 	// printf("7%s", get_next_line(fd));
-// 	// printf("%s", get_next_line(fd));
-// 	// printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
 // 	close(fd);
 // 	return (0);
 // }
