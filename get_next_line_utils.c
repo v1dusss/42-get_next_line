@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:23:09 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/27 15:49:01 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:25:14 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*result;
 
 	if (!s2)
-		return (NULL);
-	if (!s1)
+		return (free(s1), NULL);
+	if (!s1 || s1 == NULL)
 	{
 		s1 = malloc(sizeof(char) * 1);
 		if (!s1)

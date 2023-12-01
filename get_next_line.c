@@ -6,18 +6,19 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/11/27 16:08:50 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:16:56 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_trim_cache(char *cache)
+char	*ft_trim_cache(char *cache, char **temp)
 {
 	char	*result;
 	int		newline;
 	int		ind;
 
+	result = NULL;
 	if (cache == NULL || ft_strlen(cache, 0) == 0)
 		return (free(cache), NULL);
 	newline = ft_strlen(cache, 1);
@@ -27,13 +28,10 @@ char	*ft_trim_cache(char *cache)
 		newline = -1;
 	result = malloc(sizeof(char) * (newline + 2));
 	if (!result)
-		return (NULL);
-	ind = 0;
-	while (ind < newline + 1)
-	{
+		return (free(*temp), *temp = NULL, free(cache), cache = NULL, NULL);
+	ind = -1;
+	while (++ind < newline + 1)
 		result[ind] = cache[ind];
-		ind++;
-	}
 	result[ind] = 0;
 	free(cache);
 	return (result);
@@ -46,6 +44,8 @@ char	*next(char *temp)
 	char	*line;
 
 	i = 0;
+	if (temp == NULL)
+		return (NULL);
 	while (temp[i] && temp[i] != '\n')
 		i++;
 	if (!temp[i])
@@ -65,28 +65,29 @@ char	*get_next_line(int fd)
 {
 	char		*cache;
 	ssize_t		read_len;
-	static int	ind = 0;
 	static char	*temp;
 	static char	buffer[BUFFER_SIZE + 1];
 
 	cache = NULL;
 	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
-		return (buffer[0] = 0, free (temp), temp = NULL, free(cache), NULL);
+		return (free (temp), temp = NULL, free(cache), NULL);
 	read_len = 1;
 	cache = temp;
 	while (read_len > 0 && ft_strlen(cache, 1) == -1)
 	{
 		read_len = read(fd, buffer, BUFFER_SIZE);
-		if (read_len == 0 && ind++ == 0 && buffer[0] != 0)
+		if (read_len == 0 && buffer[0] != 0 && temp == NULL)
 			break ;
-		if (read_len <= 0 || (ind > 1 && temp == NULL))
-			return (free(temp), NULL);
+		if (read_len < 0)
+			return (NULL);
 		buffer[read_len] = 0;
 		temp = ft_strjoin(cache, buffer);
+		if (temp == NULL)
+			return (NULL);
 		cache = temp;
 	}
 	temp = next(temp);
-	return (ft_trim_cache(cache));
+	return (ft_trim_cache(cache, &temp));
 }
 
 // # include <unistd.h>
