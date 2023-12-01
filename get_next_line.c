@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/12/01 19:16:56 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:26:55 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_trim_cache(char *cache, char **temp)
 {
-	char	*result;
 	int		newline;
 	int		ind;
+	char	*result;
 
 	result = NULL;
 	if (cache == NULL || ft_strlen(cache, 0) == 0)
@@ -63,8 +63,8 @@ char	*next(char *temp)
 
 char	*get_next_line(int fd)
 {
+	int			read_len;
 	char		*cache;
-	ssize_t		read_len;
 	static char	*temp;
 	static char	buffer[BUFFER_SIZE + 1];
 

@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:23:09 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/12/01 18:25:14 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:32:54 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int	ft_strlen(char *str, int nb)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	i;
-	size_t	a;
+	int		i;
+	int		a;
 	char	*result;
 
 	if (!s2)
-		return (free(s1), NULL);
+		return (NULL);
 	if (!s1 || s1 == NULL)
 	{
 		s1 = malloc(sizeof(char) * 1);
@@ -60,20 +60,5 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[a] != '\0')
 		result[i++] = s2[a++];
 	result[i] = '\0';
-	free(s1);
-	return (result);
+	return (free(s1), result);
 }
-
-// int	ft_strrchr_newline(char *s)
-// {
-// 	int	c;
-
-// 	if (!s)
-// 		return (-1);
-// 	c = 0;
-// 	while (s[c] != '\n' && s[c] != '\0')
-// 		c++;
-// 	if (s[c] == '\n')
-// 		return (c);
-// 	return (-1);
-// }
