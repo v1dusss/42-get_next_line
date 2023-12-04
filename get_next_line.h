@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:42:52 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/12/01 19:31:16 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:52:43 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 #  define BUFFER_SIZE 100
 # endif
 
-char	*ft_trim_cache(char *cache, char **temp);
-char	*next(char *temp);
+char	*ft_trim_temp(char *temp, char **cache);
+char	*next(char *cache);
 char	*get_next_line(int fd);
-int		ft_strlen(char *str, int nb);
+int		ft_strlen(char *str, char c);
 char	*ft_strjoin(char *s1, char *s2);
 
 #endif

@@ -6,33 +6,24 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:23:09 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/12/01 19:32:54 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:46:00 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str, int nb)
+int	ft_strlen(char *str, char c)
 {
-	int	c;
+	int	i;
 
-	c = 0;
-	if (nb == 0)
-	{
-		while (str[c] != '\0')
-			c++;
-		return (c);
-	}
-	else
-	{
-		if (!str)
-			return (-1);
-		while (str[c] != '\n' && str[c] != '\0')
-			c++;
-		if (str[c] == '\n')
-			return (c);
+	i = 0;
+	if (str == NULL)
 		return (-1);
-	}
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] == c)
+		return (i);
+	return (-1);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -50,7 +41,7 @@ char	*ft_strjoin(char *s1, char *s2)
 			return (NULL);
 		s1[0] = 0;
 	}
-	result = malloc((ft_strlen(s1, 0) + ft_strlen(s2, 0) + 1) * sizeof(char));
+	result = malloc((ft_strlen(s1, '\0') + ft_strlen(s2, '\0') + 1) * sizeof(char));
 	if (!result)
 		return (free(s1), NULL);
 	i = -1;

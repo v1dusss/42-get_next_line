@@ -6,57 +6,54 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/12/01 19:26:55 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:03:22 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_trim_cache(char *cache, char **temp)
+char	*ft_trim_temp(char *temp, char **cache)
 {
 	int		newline;
 	int		ind;
 	char	*result;
 
 	result = NULL;
-	if (cache == NULL || ft_strlen(cache, 0) == 0)
-		return (free(cache), NULL);
-	newline = ft_strlen(cache, 1);
+	if (temp == NULL || ft_strlen(temp, '\0') == 0)
+		return (free(temp), NULL);
+	newline = ft_strlen(temp, '\n');
 	if (newline == -1)
-		newline = ft_strlen(cache, 0) - 1;
-	if (ft_strlen(cache, 0) == 0)
-		newline = -1;
+		return (temp);
 	result = malloc(sizeof(char) * (newline + 2));
 	if (!result)
-		return (free(*temp), *temp = NULL, free(cache), cache = NULL, NULL);
+		return (free(*cache), *cache = NULL, free(temp), temp = NULL, NULL);
 	ind = -1;
 	while (++ind < newline + 1)
-		result[ind] = cache[ind];
+		result[ind] = temp[ind];
 	result[ind] = 0;
-	free(cache);
+	free(temp);
 	return (result);
 }
 
-char	*next(char *temp)
+char	*next(char *cache)
 {
 	int		i;
 	int		j;
 	char	*line;
 
 	i = 0;
-	if (temp == NULL)
+	if (cache == NULL)
 		return (NULL);
-	while (temp[i] && temp[i] != '\n')
+	while (cache[i] && cache[i] != '\n')
 		i++;
-	if (!temp[i])
+	if (!cache[i])
 		return (NULL);
-	line = malloc((ft_strlen(temp, 0) - i + 1));
+	line = malloc((ft_strlen(cache, '\0') - i + 1));
 	if (!line)
 		return (NULL);
-	i++;
 	j = 0;
-	while (temp[i])
-		line[j++] = temp[i++];
+	while (cache[++i])
+		line[j++] = cache[i];
 	line[j++] = '\0';
 	return (line);
 }
@@ -64,30 +61,30 @@ char	*next(char *temp)
 char	*get_next_line(int fd)
 {
 	int			read_len;
-	char		*cache;
-	static char	*temp;
+	char		*temp;
+	static char	*cache;
 	static char	buffer[BUFFER_SIZE + 1];
 
-	cache = NULL;
+	temp = NULL;
 	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
-		return (free (temp), temp = NULL, free(cache), NULL);
+		return (free (cache), cache = NULL, free(temp), NULL);
 	read_len = 1;
-	cache = temp;
-	while (read_len > 0 && ft_strlen(cache, 1) == -1)
+	temp = cache;
+	while (read_len > 0 && ft_strlen(temp, '\n') == -1)
 	{
 		read_len = read(fd, buffer, BUFFER_SIZE);
-		if (read_len == 0 && buffer[0] != 0 && temp == NULL)
+		if (read_len == 0 && cache == NULL)
 			break ;
 		if (read_len < 0)
 			return (NULL);
 		buffer[read_len] = 0;
-		temp = ft_strjoin(cache, buffer);
-		if (temp == NULL)
+		cache = ft_strjoin(cache, buffer);
+		if (cache == NULL)
 			return (NULL);
-		cache = temp;
+		temp = cache;
 	}
-	temp = next(temp);
-	return (ft_trim_cache(cache, &temp));
+	cache = next(cache);
+	return (ft_trim_temp(temp, &cache));
 }
 
 // # include <unistd.h>
