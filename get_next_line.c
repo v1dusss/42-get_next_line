@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:22:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2023/12/04 22:03:22 by vsivanat         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:13:19 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_next_line(int fd)
 	int			read_len;
 	char		*temp;
 	static char	*cache;
-	static char	buffer[BUFFER_SIZE + 1];
+	char		buffer[BUFFER_SIZE + 1];
 
 	temp = NULL;
 	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
